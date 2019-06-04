@@ -2,7 +2,6 @@ import React from 'react'
 import { Collapse, Slider, Select, Form, Button, Radio } from 'antd'
 import NumericInput from '../Utils/NumericInput'
 import { industry } from '../../lib/industry'
-import { Link } from 'react-router-dom'
 import TextWithTooltip from '../Utils/TextWithTooltip'
 import './Results.css'
 
@@ -38,8 +37,6 @@ const rtStyle = {
     width: '30%',
 }
 
-const co2 = <p>Change your CO<sub>2</sub> emissions</p>
-
 const percs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 export default function OptionsPanel(props) {
@@ -58,7 +55,9 @@ export default function OptionsPanel(props) {
                         <Form.Item>
                             <label><b>Annual Turnover (Euro's)</b></label>
                             <NumericInput
-                                maxLength={20}
+                                maxLength={16}
+                                placeholder="Fill in your revenue" 
+                                tiptext="Fill in your revenue"
                                 prefix="€"
                                 value={props.values.turnover}
                                 onChange={e => props.onChange(e, 'turnover')}
@@ -114,7 +113,7 @@ export default function OptionsPanel(props) {
                 </Panel>
             </Collapse>
             <Collapse defaultActiveKey={['1']} style={collapseStyle}>
-                <Panel header={co2} style={panelStyle}>
+                <Panel header={`Change your CO\u2082 emissions`} style={panelStyle}>
                     <TextWithTooltip topic='emissions' className='infoStyle' />
                     <Form style={formStyle} layout="inline">
                         <Form.Item>
@@ -136,7 +135,9 @@ export default function OptionsPanel(props) {
                             {props.values.emissionsKnown === 'yes'
                                 ? <NumericInput
                                     style={emissionStyle}
-                                    maxLength={25}
+                                    placeholder={`Emissions in tons CO\u2082`}
+                                    tiptext="Enter your emissions"
+                                    maxLength={16}
                                     value={props.values.S1emissions}
                                     onChange={e => props.onChange(e, 'S1emissions')}
                                 />
@@ -161,7 +162,9 @@ export default function OptionsPanel(props) {
                             {props.values.emissionsKnown === 'yes'
                                 ? <NumericInput
                                     style={emissionStyle}
-                                    maxLength={25}
+                                    placeholder={`Emissions in tons CO\u2082`}
+                                    tiptext="Enter your emissions"
+                                    maxLength={16}
                                     value={props.values.S2emissions}
                                     onChange={e => props.onChange(e, 'S2emissions')}
                                 />
@@ -186,7 +189,9 @@ export default function OptionsPanel(props) {
                             {props.values.emissionsKnown === 'yes'
                                 ? <NumericInput
                                     style={emissionStyle}
-                                    maxLength={25}
+                                    placeholder={`Emissions in tons CO\u2082`}
+                                    tiptext="Enter your emissions"
+                                    maxLength={16}
                                     value={props.values.S3emissions}
                                     onChange={e => props.onChange(e, 'S3emissions')}
                                 />
@@ -207,7 +212,7 @@ export default function OptionsPanel(props) {
                     </Form>
                 </Panel>
             </Collapse>
-            <Link to="/ecochain">
+            <a href="https://ecochain.com/carbon-tax-calculator/" target="_blank" >
                 <Button
                     type="primary"
                     size="large"
@@ -220,7 +225,7 @@ export default function OptionsPanel(props) {
                 >
                     <b>Calculate your exact emissions</b>
                 </Button>
-            </Link>
+            </a>
         </div>
     )
 }
